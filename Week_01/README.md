@@ -127,6 +127,11 @@ JVM进程内存模型各组成部分：
 
 3. **非堆Non-Heap** 包含CCS, CodeCache等部分, JDK8之后永久代改为Metaspace，位置移动到了非堆空间中，用于保存常量和方法的代码段等不变的信息
 
+*JMV启动参数和对应内存区域之间的关系*
+
+<img src="https://github.com/xiaohaowudi/JAVA-000/blob/main/Week_01/images/JMM%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%85%B3%E7%B3%BB.png" width="80%" height="80%" />
+
+
 
 
 ### 小结
