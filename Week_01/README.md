@@ -87,9 +87,20 @@ b. **局部变量表** 线程栈帧的组成部分，类似于CPU中通用寄存
 
 ### 1.4.5 类加载器的运行原则
 1. **双亲委托** 当前级别的类加载器加载类时候会先查看其上一级的类加载器有没有加载对应的类，如果已经加载了则直接使用
+
 *类加载器的层级关系*
 
 <img src="https://github.com/xiaohaowudi/JAVA-000/blob/main/Week_01/images/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E5%B1%82%E7%BA%A7%E5%85%B3%E7%B3%BB.png" width="60%" height="60%" />
+
+
+*类加载器具体实现类的继承关系*
+
+<img src="https://github.com/xiaohaowudi/JAVA-000/blob/main/Week_01/images/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%AE%9E%E7%8E%B0%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.png" width="60%" height="60%" />
+
+
+2. **负责依赖** 加载一个类时候，其依赖的所有类也必须被加载
+3. **缓存加载** 对于同一个类加载器而言，其已经加载的类只会被加载一次，第二次会从缓存中读取直接使用
+
 
 
 ### 小结
