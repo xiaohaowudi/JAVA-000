@@ -1611,6 +1611,11 @@ $ java -XX:+UseG1GC -Xms4g -Xmx4g -XX:+PrintGC -XX:+PrintGCDateStamps GCLogAnaly
 执行结束!共生成对象次数:18612
 ```
 
+统计结果
+<img src="https://github.com/xiaohaowudi/JAVA-000/blob/main/Week_02/image/GC%E7%BB%9F%E8%AE%A1%E7%BB%93%E6%9E%9C.png" width="150%" height="150%" />
+
+
+
 
 
 
