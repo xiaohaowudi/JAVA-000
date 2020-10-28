@@ -1,4 +1,4 @@
-本文按照堆大小256M, 512M, 1G, 2G, 4G 五种规格分别对串行GC，并行GC，CMS GC和G1 GC进行GC日志的记录和分析
+本文按照堆大小256M, 512M, 1G, 2G, 4G 五种规格分别对串行GC，并行GC，CMS GC和G1 GC进行GC日志的记录和分析, 分别通过不同参数运行GCLogAnalysis程序，记录其GC日志，然后用SB压测工具压测gateway-server-0.0.1-SNAPSHOT.jar程序，观察不同的堆大小，不同GC对于程序吞吐量的影响
 
 ## 测试环境
 
@@ -1611,8 +1611,512 @@ $ java -XX:+UseG1GC -Xms4g -Xmx4g -XX:+PrintGC -XX:+PrintGCDateStamps GCLogAnaly
 执行结束!共生成对象次数:18612
 ```
 
-### 统计结果
+### GC日志统计结果
 <img src="https://github.com/xiaohaowudi/JAVA-000/blob/main/Week_02/image/GC%E7%BB%9F%E8%AE%A1%E7%BB%93%E6%9E%9C.png" width="150%" height="150%" />
+
+
+
+## gateway-server-0.0.1-SNAPSHOT.jar 压测
+
+### 24M堆内存，串行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:00:15 PM
+[Press C to stop the test]
+65812   (RPS: 1981.2)
+---------------Finished!----------------
+Finished at 10/28/2020 2:00:49 PM (took 00:00:33.3517734)
+Status 200:    65826
+RPS: 2115.7 (requests/second)
+Max: 428ms
+Min: 0ms
+Avg: 7.6ms
+  50%   below 1ms
+  60%   below 2ms
+  70%   below 4ms
+  80%   below 8ms
+  90%   below 33ms
+  95%   below 36ms
+  98%   below 40ms
+  99%   below 44ms
+99.9%   below 64ms
+```
+
+### 48M堆内存，串行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:01:56 PM
+[Press C to stop the test]
+95096   (RPS: 2865)
+---------------Finished!----------------
+Finished at 10/28/2020 2:02:30 PM (took 00:00:33.3361355)
+Status 200:    95096
+RPS: 3054.9 (requests/second)
+Max: 531ms
+Min: 0ms
+Avg: 2.7ms
+  50%   below 1ms
+  60%   below 2ms
+  70%   below 3ms
+  80%   below 4ms
+  90%   below 6ms
+  95%   below 8ms
+  98%   below 13ms
+  99%   below 15ms
+99.9%   below 31ms
+```
+
+
+
+### 72M堆内存，串行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:03:30 PM
+[Press C to stop the test]
+99497   (RPS: 3000.1)
+---------------Finished!----------------
+Finished at 10/28/2020 2:04:03 PM (took 00:00:33.3213608)
+Status 200:    99497
+RPS: 3194.7 (requests/second)
+Max: 624ms
+Min: 0ms
+Avg: 2.6ms
+  50%   below 1ms
+  60%   below 2ms
+  70%   below 2ms
+  80%   below 4ms
+  90%   below 5ms
+  95%   below 8ms
+  98%   below 12ms
+  99%   below 14ms
+99.9%   below 37ms
+```
+
+### 512M堆内存，串行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:04:40 PM
+[Press C to stop the test]
+95878   (RPS: 2889.5)
+---------------Finished!----------------
+Finished at 10/28/2020 2:05:13 PM (took 00:00:33.3390934)
+Status 200:    95878
+RPS: 3077.9 (requests/second)
+Max: 513ms
+Min: 0ms
+Avg: 2.5ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 4ms
+  90%   below 6ms
+  95%   below 8ms
+  98%   below 12ms
+  99%   below 15ms
+99.9%   below 27ms
+```
+
+### 1G堆内存，串行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:06:05 PM
+[Press C to stop the test]
+100855  (RPS: 3035.9)
+---------------Finished!----------------
+Finished at 10/28/2020 2:06:38 PM (took 00:00:33.3767979)
+Status 200:    100873
+RPS: 3239.5 (requests/second)
+Max: 620ms
+Min: 0ms
+Avg: 2.3ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 7ms
+  98%   below 11ms
+  99%   below 14ms
+99.9%   below 32ms
+```
+
+
+### 24M堆内存，并行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:07:36 PM
+[Press C to stop the test]
+62640   (RPS: 1884.8)
+---------------Finished!----------------
+Finished at 10/28/2020 2:08:09 PM (took 00:00:33.3900805)
+Status 200:    62640
+RPS: 2010.5 (requests/second)
+Max: 759ms
+Min: 0ms
+Avg: 8.4ms
+  50%   below 2ms
+  60%   below 4ms
+  70%   below 10ms
+  80%   below 18ms
+  90%   below 23ms
+  95%   below 26ms
+  98%   below 33ms
+  99%   below 41ms
+99.9%   below 73ms
+```
+
+### 48M堆内存，并行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:09:26 PM
+[Press C to stop the test]
+99641   (RPS: 2999)
+---------------Finished!----------------
+Finished at 10/28/2020 2:10:00 PM (took 00:00:33.3750581)
+Status 200:    99641
+RPS: 3200.1 (requests/second)
+Max: 564ms
+Min: 0ms
+Avg: 2.5ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 4ms
+  90%   below 5ms
+  95%   below 7ms
+  98%   below 12ms
+  99%   below 14ms
+99.9%   below 24ms
+```
+
+### 72M堆内存，并行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:11:03 PM
+[Press C to stop the test]
+96210   (RPS: 2898.2)
+---------------Finished!----------------
+Finished at 10/28/2020 2:11:36 PM (took 00:00:33.3595714)
+Status 200:    96220
+RPS: 3089.2 (requests/second)
+Max: 526ms
+Min: 0ms
+Avg: 2.5ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 8ms
+  98%   below 13ms
+  99%   below 15ms
+99.9%   below 32ms
+```
+
+
+### 512M堆内存，并行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:12:03 PM
+[Press C to stop the test]
+97035   (RPS: 2921.7)
+---------------Finished!----------------
+Finished at 10/28/2020 2:12:36 PM (took 00:00:33.3939947)
+Status 200:    97047
+RPS: 3113.9 (requests/second)
+Max: 514ms
+Min: 0ms
+Avg: 2.5ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 8ms
+  98%   below 13ms
+  99%   below 15ms
+99.9%   below 39ms
+```
+
+
+### 1G堆内存，并行GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:13:02 PM
+[Press C to stop the test]
+98437   (RPS: 2966.7)
+---------------Finished!----------------
+Finished at 10/28/2020 2:13:35 PM (took 00:00:33.3275399)
+Status 200:    98437
+RPS: 3161.9 (requests/second)
+Max: 520ms
+Min: 0ms
+Avg: 2.4ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 8ms
+  98%   below 12ms
+  99%   below 15ms
+99.9%   below 34ms
+
+```
+
+
+### 24M堆内存，CMS GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:14:17 PM
+[Press C to stop the test]
+53613   (RPS: 1608.9)
+---------------Finished!----------------
+Finished at 10/28/2020 2:14:50 PM (took 00:00:33.4581157)
+Status 200:    53641
+RPS: 1723.2 (requests/second)
+Max: 496ms
+Min: 0ms
+Avg: 10.5ms
+  50%   below 4ms
+  60%   below 5ms
+  70%   below 9ms
+  80%   below 14ms
+  90%   below 38ms
+  95%   below 42ms
+  98%   below 48ms
+  99%   below 54ms
+99.9%   below 80ms
+
+```
+
+### 48M堆内存，CMS GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:15:22 PM
+[Press C to stop the test]
+92643   (RPS: 2790.9)
+---------------Finished!----------------
+Finished at 10/28/2020 2:15:56 PM (took 00:00:33.3795368)
+Status 200:    92646
+RPS: 2972.1 (requests/second)
+Max: 553ms
+Min: 0ms
+Avg: 2.8ms
+  50%   below 1ms
+  60%   below 2ms
+  70%   below 2ms
+  80%   below 4ms
+  90%   below 6ms
+  95%   below 9ms
+  98%   below 13ms
+  99%   below 16ms
+99.9%   below 37ms
+```
+
+
+### 72M堆内存，CMS GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:16:42 PM
+[Press C to stop the test]
+92665   (RPS: 2790.7)
+---------------Finished!----------------
+Finished at 10/28/2020 2:17:15 PM (took 00:00:33.3627373)
+Status 200:    92665
+RPS: 2975.2 (requests/second)
+Max: 541ms
+Min: 0ms
+Avg: 2.7ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 4ms
+  90%   below 6ms
+  95%   below 8ms
+  98%   below 13ms
+  99%   below 16ms
+99.9%   below 34ms
+
+```
+
+### 512M堆内存，CMS GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:17:40 PM
+[Press C to stop the test]
+97490   (RPS: 2933.9)
+---------------Finished!----------------
+Finished at 10/28/2020 2:18:14 PM (took 00:00:33.4102841)
+Status 200:    97505
+RPS: 3128.7 (requests/second)
+Max: 591ms
+Min: 0ms
+Avg: 2.5ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 8ms
+  98%   below 12ms
+  99%   below 15ms
+99.9%   below 36ms
+```
+
+### 1G堆内存，CMS GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:18:40 PM
+[Press C to stop the test]
+95855   (RPS: 2887.1)
+---------------Finished!----------------
+Finished at 10/28/2020 2:19:14 PM (took 00:00:33.3658711)
+Status 200:    95855
+RPS: 3077 (requests/second)
+Max: 547ms
+Min: 0ms
+Avg: 2.4ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 8ms
+  98%   below 13ms
+  99%   below 15ms
+99.9%   below 38ms
+```
+
+
+### 24M堆内存，G1 GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:19:44 PM
+[Press C to stop the test]
+58305   (RPS: 1755.5)
+---------------Finished!----------------
+Finished at 10/28/2020 2:20:17 PM (took 00:00:33.2710906)
+Status 200:    58312
+RPS: 1879.2 (requests/second)
+Max: 551ms
+Min: 0ms
+Avg: 9.3ms
+  50%   below 5ms
+  60%   below 7ms
+  70%   below 9ms
+  80%   below 13ms
+  90%   below 21ms
+  95%   below 30ms
+  98%   below 40ms
+  99%   below 48ms
+99.9%   below 94ms
+```
+
+
+
+### 48M堆内存，G1 GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:21:03 PM
+[Press C to stop the test]
+94613   (RPS: 2853)
+---------------Finished!----------------
+Finished at 10/28/2020 2:21:37 PM (took 00:00:33.3450543)
+Status 200:    94614
+RPS: 3035.9 (requests/second)
+Max: 513ms
+Min: 0ms
+Avg: 2.9ms
+  50%   below 1ms
+  60%   below 2ms
+  70%   below 3ms
+  80%   below 4ms
+  90%   below 6ms
+  95%   below 9ms
+  98%   below 14ms
+  99%   below 18ms
+99.9%   below 43ms
+```
+
+### 72M堆内存，G1 GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:22:19 PM
+[Press C to stop the test]
+96194   (RPS: 2901.3)
+---------------Finished!----------------
+Finished at 10/28/2020 2:22:53 PM (took 00:00:33.3346879)
+Status 200:    96196
+RPS: 3087.1 (requests/second)
+Max: 564ms
+Min: 0ms
+Avg: 2.6ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 8ms
+  98%   below 13ms
+  99%   below 16ms
+99.9%   below 65ms
+```
+
+
+
+### 512M堆内存，G1 GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:24:01 PM
+[Press C to stop the test]
+97060   (RPS: 2924.7)
+---------------Finished!----------------
+Finished at 10/28/2020 2:24:34 PM (took 00:00:33.3508437)
+Status 200:    97060
+RPS: 3114.1 (requests/second)
+Max: 586ms
+Min: 0ms
+Avg: 2.4ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 7ms
+  98%   below 12ms
+  99%   below 15ms
+99.9%   below 37ms
+
+```
+
+
+
+### 1G堆内存，G1 GC压测记录
+```
+gongruohao@GRHWIN10 C:\Users\GongRuoHao\Desktop\PressureTestTool>sb -u http://192.168.3.144:8088/api/hello -c 35 -N 30
+Starting at 10/28/2020 2:25:34 PM
+[Press C to stop the test]
+97498   (RPS: 2939.4)
+---------------Finished!----------------
+Finished at 10/28/2020 2:26:07 PM (took 00:00:33.3187000)
+Status 200:    97498
+RPS: 3132.4 (requests/second)
+Max: 544ms
+Min: 0ms
+Avg: 2.4ms
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 2ms
+  80%   below 3ms
+  90%   below 5ms
+  95%   below 7ms
+  98%   below 12ms
+  99%   below 15ms
+99.9%   below 33ms
+```
+
+
 
 ### 结果分析
 **四种GC算法的共同点：**
