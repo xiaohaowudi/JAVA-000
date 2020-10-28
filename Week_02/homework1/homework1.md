@@ -2125,8 +2125,7 @@ Avg: 2.4ms
 ```
 
 ### 性能压测统计结果
-
-
+<img src="https://github.com/xiaohaowudi/JAVA-000/blob/main/Week_02/image/RPS%E7%BB%9F%E8%AE%A1%E7%BB%93%E6%9E%9C.png" width="150%" height="150%" />
 
 
 
