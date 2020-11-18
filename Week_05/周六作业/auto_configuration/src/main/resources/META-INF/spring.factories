@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.javacamp.homework5.auto_configuration.configuration.EnableSchoolAutoConfiguration
