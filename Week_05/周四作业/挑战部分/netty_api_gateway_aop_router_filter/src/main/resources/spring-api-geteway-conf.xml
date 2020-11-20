@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="gateway" />
+
+    <!--filter对象-->
+    <bean id = "addDevInfoFilter" class = "gateway.filter.AddDevelopInfoFilter"/>
+    <bean id = "addNameFilter" class = "gateway.filter.AddNameFilter"/>
+    <bean id = "addVersionFilter" class = "gateway.filter.AddVersionFilter"/>
+
+    <!--router对象-->
+    <bean id = "weightRouter" class = "gateway.router.WeightRouter"/>
+    <bean id = "randomRouter" class = "gateway.router.RandomRouter"/>
+
+    <!--http客户端对象-->
+    <bean id = "nettyHttpClient" class = "gateway.client.NettyHttpClientAsyncGet" scope="prototype"/>
+    <bean id = "okHttpClient" class = "gateway.client.OkHttpClientAsyncGet" scope="prototype"/>
+
+    <bean id = "outboundRouteResolver" class = "gateway.server.OutboundRouteResolver"/>
+
+    <bean id = "outBoundHandler" class = "gateway.server.HttpOutboundHandler" scope="prototype">
+        <property name="httpClient" ref = "okHttpClient"/>
+        <property name="threadPool" ref = "threadPool"/>
+        <property name="resolver" ref = "outboundRouteResolver"/>
+    </bean>
+
+    <bean id = "inboundMsgHandler" class = "gateway.server.InboundMsgHandler"/>
+
+
+    <bean id = "inBoundHandler" class = "gateway.server.HttpInboundHandler" scope="prototype">
+        <property name="outboundHandler" ref = "outBoundHandler"/>
+        <property name="inboundMsgHandler" ref = "inboundMsgHandler"/>
+    </bean>
+
+    <bean id = "filterAspect" class = "gateway.aspect.FilterAspect"/>
+    <bean id = "routerAspect" class = "gateway.aspect.RouterAspect"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:config>
+
+        <aop:pointcut expression="execution(* gateway.server.InboundMsgHandler.handleMsg(..)) and args(ctx, msg, outboundHandler)"  id="filterPointcut"/>
+        <aop:pointcut expression="execution(* gateway.server.OutboundRouteResolver.resolveTargetUrl(..)) and args(uri)"  id="routerPointcut"/>
+
+        <!--Filter增强的切面定义-->
+        <aop:aspect ref="filterAspect">
+            <aop:around method = "aroundFilter" pointcut-ref = "filterPointcut" arg-names="pjp,ctx,msg,outboundHandler"/>
+        </aop:aspect>
+
+        <!--Router增强的切面定义-->
+        <aop:aspect ref="routerAspect">
+            <aop:around method = "aroundRouter" pointcut-ref = "routerPointcut" arg-names="pjp,uri"/>
+        </aop:aspect>
+
+    </aop:config>
+
+</beans>
