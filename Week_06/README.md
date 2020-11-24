@@ -7,9 +7,13 @@ Lambda表达式是一种实现函数式编程的方式，在许多语言中都�
 Java库中比较常见的Lambda表达式先关的接口有如下几种
 1. Predicate<T>  有参数的条件判断，实现断言功能，其test方法返回boolean类型判断结果，其实现类需要对该方法进行实现
 2. Function<T，R> 有单个参数，有返回值的可执行对象 核心方法是apply compose andThen三个
+  
   apply 方法在Function接口中没有默认实现，需要实现类自己进行逻辑实现，apply(t)表示在当前Lambda对象上执行以t为参数的操作，返回R类型结果
+  
   compose 方法在Function接口中有默认实现，其功能是组合当前对象和传入的before对象，返回新包装出来的Lambda对象，返回的包装对象的执行逻辑是先执行before对象中的操作，其操作结果再作为当前对象的参数进行执行，最终返回执行结果
+  
   andThen 方法在Function接口中也有默认实现，其功能刚好和compose相反，也是包装一个新的Lambda对象，该对象的执行逻辑是先执行当前对象的运算，然后将执行结果作为after对象的执行参数，最终返回after对象的执行结果
+  
   通过 compoose 和 andThen 两个方法的组合调用可以灵活地将多个Lambda对象按特性顺序进行组合包装，互相复用对方的功能
   
 3. Consumer<T> 无返回值的数据消费者
