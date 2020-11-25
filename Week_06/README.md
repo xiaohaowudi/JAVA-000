@@ -124,6 +124,79 @@ BC范式：满足三范式前提下，消除主尚需经对码的部分函数和
 
 6、指针控制语言(CCL):典型的包括DECLARE CURSOR，FETCH INTO和UPDATE WHERE CURRENT， 用于对一个或多个表单独行的操作。
 
+### MySQL基本架构
+<img src="https://github.com/xiaohaowudi/JAVA-000/blob/main/Week_06/image/MySQL%E6%9E%B6%E6%9E%84%E5%9B%BE.png" width="60%" height="60%" />
+
+### MySQL中SQL执行基本流程
+
+<img src="https://github.com/xiaohaowudi/JAVA-000/blob/main/Week_06/image/MySQL%E7%AE%80%E5%8D%95%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png" height="60%" width="60%"/>
+
+
+1. 查询缓存有没有已经执行过的缓存结果，如果有直接返回结果
+2. 解析器解析SQL语句为语法树，进入预处理器进行处理
+3. 优化器优化SQL的执行操作生成最终的执行计划
+4. 调用存储引擎的接口完成执行计划
+5. 将结果集返回给客户端
+
+### 一条SQL语句的执行顺序
+1. from 子句：从表中提取数据
+2. on join子句： 根据属性值对多个表进行连接操作
+3. where子句： 根据条件对结果集进行过滤
+4. gorup by: 对数据进行分组
+5. having + 聚合函数： 每个分组中进行过滤和聚合
+6. select: 在结果集中选择属性列
+7. order by: 对结果进行排序
+8. limit: mysql特有，截断结果集后面部分，只保留前面固定数量的记录
+
+### MySQL索引结构
+B+树结构实现聚集索引，在特定的一棵索引树上查找到目标对象的时间复杂度是log(N), 其中log表示以k为底的对数，N为叶子节点个数，k为B+树节点的分叉数，也就是和树高度呈线性关系，层数越少查询效率越高，也能够尽量避免磁盘IO，建议一般单表数据不要超过2000万条
+
+### 常见的MySQL优化参数
+1. max_connections
+2. back_log
+3. wait_timeout
+4. interative_timeout
+4、key_buffer_size
+5. query_cache_size
+6. max_connect_errors
+7. sort_buffer_size
+8. max_allowed_packet
+9. join_buffer_size
+10. thread_cache_size=300
+11. innodb_buffer_pool_size
+12. innodb_flush_log_at_trx_commit
+13. innodb_thread_concurrency
+14. innodb_log_buffer_size
+15. innodb_log_file_size=50M
+16. innodb_log_files_in_group=3
+17. read_buffer_size=1M
+18. read_rnd_buffer_size
+19. bulk_insert_buffer_size
+20. binary log
+
+### 数据库设计常见的一些最佳实践
+1. 需要根据存储引擎的特性和数据的特点选择使用的存储引擎，并不是所有数据都用InnoDB引擎就是最好的
+2. 合理拆分宽表，合理应用数据库设计范式对库表结进行约束
+3. 属性的数据类型选择要明确，长度尽量短，这样能够提升数据库效率，text/blob/clob这样长度不固定的数据类型不建议放到RDBMS中存储，会拖慢数据库运行效率，可以考虑放到其他文件系统中存储
+4. 时间最好使用时间戳方式存储，对计算友好
+5. 对于高精度浮点数可以考虑用 整数+精度 或者 字符串+精度 的方式进行存储，规避浮点数精度不足造成的问题
+6. 外键和触发器不建议使用
+7. 可以适当破坏范式，增加一些冗余字段，让业务处理更加方便高效
+8. 游标，变量，视图，自定义函数，存储过程大多数场景下不建议使用, 难以维护
+9. 在线DDL操作会有比较重型加锁行为，会造成业务阻塞，建议在业务压力小时候进行
+10. 建议添加create_time, update_time时间戳，方便业务处理
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
