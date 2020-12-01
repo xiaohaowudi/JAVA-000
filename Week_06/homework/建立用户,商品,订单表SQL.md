@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS OrderBaseInfo (
     status TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '订单状态',
     trade_no VARCHAR(100) NOT NULL DEFAULT '' COMMENT '支付交易号',
 
-    create_time_stamp INT UNSIGNED NOT NULL COMMENT '创建订单时间戳',
-    modify_time_stamp INT UNSIGNED NOT NULL COMMENT '订单基本信息变更时间戳',
+    create_time_stamp BIGINT UNSIGNED NOT NULL COMMENT '创建订单时间戳',
+    modify_time_stamp BIGINT UNSIGNED NOT NULL COMMENT '订单基本信息变更时间戳',
     PRIMARY KEY(order_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '订单表';
 
