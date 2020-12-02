@@ -31,7 +31,7 @@ spring.shardingsphere.datasource.s0.password=123456
 spring.shardingsphere.sharding.master-slave-rules.ds0.master-data-source-name=m0
 spring.shardingsphere.sharding.master-slave-rules.ds0.slave-data-source-names=s0
 
-# 指定user_db库里面t_user表专库专用
+# 指定订单实体的数据源
 spring.shardingsphere.sharding.tables.OrderBaseInfo.actual-data-nodes=ds$->{0}.OrderBaseInfo
 
 # 指定主键生成策略
