@@ -28,6 +28,7 @@
 是最新的状态
 
 **A - Availability**
+
 可用性是指任何事务操作都可以得到响应结果，且不会出现响应超时或响应错误
 
 **P - Partition tolerance**
