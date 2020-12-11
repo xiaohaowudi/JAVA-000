@@ -1,4 +1,4 @@
-package com.javacmap.distributed_transaction_ax.resource_manager;
+package com.javacmap.distributed_transaction_xa.resource_manager;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

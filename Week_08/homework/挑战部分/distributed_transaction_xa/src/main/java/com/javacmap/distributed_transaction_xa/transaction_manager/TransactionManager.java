@@ -1,4 +1,4 @@
-package com.javacmap.distributed_transaction_ax.transaction_manager;
+package com.javacmap.distributed_transaction_xa.transaction_manager;
 
 
 // 全局事务管理器接口

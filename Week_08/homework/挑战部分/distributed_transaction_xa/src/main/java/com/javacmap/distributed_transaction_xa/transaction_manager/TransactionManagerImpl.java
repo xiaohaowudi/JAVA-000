@@ -1,6 +1,6 @@
-package com.javacmap.distributed_transaction_ax.transaction_manager;
+package com.javacmap.distributed_transaction_xa.transaction_manager;
 
-import com.javacmap.distributed_transaction_ax.resource_manager.ResourceManager;
+import com.javacmap.distributed_transaction_xa.resource_manager.ResourceManager;
 import lombok.extern.java.Log;
 
 import java.util.*;

@@ -1,6 +1,6 @@
-package com.javacmap.distributed_transaction_ax.application;
+package com.javacmap.distributed_transaction_xa.application;
 
-import com.javacmap.distributed_transaction_ax.transaction_manager.TransactionManager;
+import com.javacmap.distributed_transaction_xa.transaction_manager.TransactionManager;
 import lombok.extern.java.Log;
 
 // 故意触发回滚的业务实现

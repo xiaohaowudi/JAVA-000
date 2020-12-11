@@ -1,4 +1,4 @@
-package com.javacmap.distributed_transaction_ax;
+package com.javacmap.distributed_transaction_xa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

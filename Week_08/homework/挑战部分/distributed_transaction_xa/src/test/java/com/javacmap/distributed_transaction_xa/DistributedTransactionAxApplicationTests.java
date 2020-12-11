@@ -1,20 +1,17 @@
-package com.javacmap.distributed_transaction_ax;
+package com.javacmap.distributed_transaction_xa;
 
-import com.javacmap.distributed_transaction_ax.application.Application;
-import com.javacmap.distributed_transaction_ax.application.ApplicationInsertData;
-import com.javacmap.distributed_transaction_ax.application.ApplicationInsertDataFail;
-import com.javacmap.distributed_transaction_ax.resource_manager.MySqlRM;
-import com.javacmap.distributed_transaction_ax.resource_manager.ResourceManager;
-import com.javacmap.distributed_transaction_ax.transaction_manager.TransactionManager;
-import com.javacmap.distributed_transaction_ax.transaction_manager.TransactionManagerImpl;
+import com.javacmap.distributed_transaction_xa.application.Application;
+import com.javacmap.distributed_transaction_xa.application.ApplicationInsertData;
+import com.javacmap.distributed_transaction_xa.application.ApplicationInsertDataFail;
+import com.javacmap.distributed_transaction_xa.resource_manager.MySqlRM;
+import com.javacmap.distributed_transaction_xa.resource_manager.ResourceManager;
+import com.javacmap.distributed_transaction_xa.transaction_manager.TransactionManager;
+import com.javacmap.distributed_transaction_xa.transaction_manager.TransactionManagerImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 @SpringBootTest
 class DistributedTransactionAxApplicationTests {
