@@ -5,7 +5,7 @@ import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 
-// 成功量像个数据源插入数据的app业务实现
+// 成功向数据源插入数据的app业务实现
 @Log
 public class ApplicationInsertData implements Application {
     @Override

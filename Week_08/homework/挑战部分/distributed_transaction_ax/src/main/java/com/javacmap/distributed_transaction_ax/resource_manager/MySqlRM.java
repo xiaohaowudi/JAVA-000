@@ -84,7 +84,6 @@ public class MySqlRM implements ResourceManager {
         return isSuccess;
     }
 
-
     private boolean endTransaction(long xid, boolean isCommit) {
         boolean isSuccess = true;
 

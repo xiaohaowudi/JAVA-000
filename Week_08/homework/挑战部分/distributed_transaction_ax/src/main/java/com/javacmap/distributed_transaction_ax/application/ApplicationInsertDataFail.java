@@ -18,7 +18,7 @@ public class ApplicationInsertDataFail implements Application {
                 "insert into t_id_name (id, name) values (5000, 'XiaoHong2000')",   // 故意构造主键重复错误，触发回滚
         };
 
-        // 添加分支事务, 全局事务号为100
+        // 添加分支事务, 全局事务号为200
         if (!tm.addBranchTransaction(200, "ds1", sqls1)) {
             log.info("add branch transaction fail");
             return;
