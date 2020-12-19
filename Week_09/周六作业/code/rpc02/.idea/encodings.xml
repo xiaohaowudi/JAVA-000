@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/dubbo-demo-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-demo-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-demo-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-demo-provider1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-demo-provider2/src/main/java" charset="UTF-8" />
+  </component>
+</project>
