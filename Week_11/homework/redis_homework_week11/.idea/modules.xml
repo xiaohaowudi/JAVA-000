@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/distributed-counter/distributed-counter.iml" filepath="$PROJECT_DIR$/distributed-counter/distributed-counter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/distributed-lock/distributed-lock.iml" filepath="$PROJECT_DIR$/distributed-lock/distributed-lock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/redis_homework_week11.iml" filepath="$PROJECT_DIR$/redis_homework_week11.iml" />
+    </modules>
+  </component>
+</project>
