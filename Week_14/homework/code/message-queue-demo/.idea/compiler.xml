@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="message-queue-core-api" />
+        <module name="message-queue-v1" />
+        <module name="message-queue-v3-client" />
+        <module name="message-queue-v2" />
+        <module name="message-queue-v3-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="message-queue-core-api" target="1.8" />
+      <module name="message-queue-v1" target="1.8" />
+      <module name="message-queue-v2" target="1.8" />
+      <module name="message-queue-v3-client" target="1.8" />
+      <module name="message-queue-v3-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="message-queue-core-api" options="-parameters" />
+      <module name="message-queue-v1" options="-parameters" />
+      <module name="message-queue-v2" options="-parameters" />
+      <module name="message-queue-v3-client" options="-parameters" />
+      <module name="message-queue-v3-service" options="-parameters" />
+    </option>
+  </component>
+</project>
